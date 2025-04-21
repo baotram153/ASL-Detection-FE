@@ -38,10 +38,14 @@ export function VideoPlayer({ stream, peerId }: { stream: MediaStream, peerId: s
               //   method: 'POST',
               //   body: formData,
               // });
-              const response = await fetch('http://localhost:3000/asl', {
-                  method: 'POST',
-                  body: formData,
-              });
+              // const response = await fetch('http://localhost:3000/asl', {
+              //     method: 'POST',
+              //     body: formData,
+              // });
+	      const response = await fetch('https://aslmeetingapi.ticklab.site/asl', {
+		   method: 'POST',
+		   body: formData,
+		})
               if (response.ok) {
                 const data = await response.json();
                 console.log(data)
@@ -63,7 +67,7 @@ export function VideoPlayer({ stream, peerId }: { stream: MediaStream, peerId: s
       if (detecting) {
           intervalId = setInterval(() => {
               captureAndSend();
-          }, 2000); // Capture every second
+          }, 1000); // Capture every second
       }
       else {
           return
