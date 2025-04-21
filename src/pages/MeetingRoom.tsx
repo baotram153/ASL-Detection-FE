@@ -106,8 +106,10 @@ export default function VideoMeeting() {
       // Start camera/mic on mount
       await startLocalStream()
 
+      const ws = new WebSocket(`wss://aslmeetingapi.ticklab.site/ws/${roomId}`)
       // const ws = new WebSocket(`wss://yolosmarthomeapi.ticklab.site/ws/${roomId}`);
-      const ws = new WebSocket(`ws://localhost:3000/ws/${roomId}`)
+      // const ws = new WebSocket(`ws://localhost:3000/ws/${roomId}`)
+
       wsRef.current = ws;
       console.log("WebSocket created")
       console.log(wsRef.current)
