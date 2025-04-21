@@ -21,7 +21,6 @@ import {
 } from "lucide-react"
 
 import { NavItem } from "../components/NavItem"
-import { VideoThumbnail } from "../components/VideoThumbnail"
 import { VideoPlayer } from "../components/VideoPlayer"
 
 export default function VideoMeeting() {
@@ -30,8 +29,8 @@ export default function VideoMeeting() {
   const roomId = urlParams.get("roomId")
   const meetingTitle = urlParams.get("meetingTitle") || "Meeting Title"
 
-  const [clientId, setClientId] = useState(null)
-  const [showChat, setShowChat] = useState(true)
+  // const [clientId, setClientId] = useState(null)
+  // const [showChat, setShowChat] = useState(true)
   const [chatMessage, setChatMessage] = useState("")
   const [chatMessages, setChatMessages] = useState([
     { id: 1, sender: "Manuela Faiza", content: "I got your score behind me hahahaha!", time: "10m" },
@@ -39,7 +38,8 @@ export default function VideoMeeting() {
   ])
   const [isMuted, setIsMuted] = useState(false)
   const [isVideoOff, setIsVideoOff] = useState(false)
-  const [participants, setParticipants] = useState([
+  // const [participants, setParticipants] = useState([
+  const participants = [
     {
       id: 1,
       name: "Ledy Sintia",
@@ -51,7 +51,8 @@ export default function VideoMeeting() {
     { id: 2, name: "Rachel Saigotik", isMuted: false, isVideoOn: true, avatar: "/placeholder.svg?height=50&width=50" },
     { id: 3, name: "Jonathan Girl", isMuted: true, isVideoOn: false, avatar: "/placeholder.svg?height=50&width=50" },
     { id: 4, name: "Riska Zaitun", isMuted: true, isVideoOn: false, avatar: "/placeholder.svg?height=50&width=50" },
-  ])
+  ]
+// ])
   const [currentTime, setCurrentTime] = useState("")
 
   const localVideoRef = useRef<HTMLVideoElement>(null)
@@ -60,7 +61,7 @@ export default function VideoMeeting() {
   const pendingCandidates = useRef<Record<string, RTCIceCandidateInit[]>>({});
   const [remoteStreams, setRemoteStreams] = useState<Record<string, MediaStream>>({})
   // const remoteStreams = useRef<Record<string, MediaStream>>({})
-  const [peerIds, setPeerIds] = useState<string[]>([])
+  // const [peerIds, setPeerIds] = useState<string[]>([])
   const wsRef = useRef<WebSocket>(null)
   const initializedRef = useRef(false);
 
@@ -73,7 +74,7 @@ export default function VideoMeeting() {
       const now = new Date()
       const hours = now.getHours()
       const minutes = now.getMinutes().toString().padStart(2, "0")
-      const ampm = hours >= 12 ? "PM" : "AM"
+      // const ampm = hours >= 12 ? "PM" : "AM"
       const formattedHours = hours % 12 || 12
 
       const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -150,12 +151,12 @@ export default function VideoMeeting() {
 
   const addPeerConnection = (peerId: string, pc: RTCPeerConnection) => {
     peerConnectionsRef.current[peerId] = pc
-    setPeerIds(Object.keys(peerConnectionsRef.current))
+    // setPeerIds(Object.keys(peerConnectionsRef.current))
   }
 
   const removePeerConnection = (peerId: string) => {
     delete peerConnectionsRef.current[peerId]
-    setPeerIds(Object.keys(peerConnectionsRef.current))
+    // setPeerIds(Object.keys(peerConnectionsRef.current))
   }
 
   // Helper: create a new RTCPeerConnection for a given peerId
@@ -210,7 +211,7 @@ export default function VideoMeeting() {
       case "new-peer": {
         console.log("New peer joined:", data.clientId)
         const newPeerId = data.clientId
-        if (newPeerId === clientId) return
+        // if (newPeerId === clientId) return
 
         const pc = createPeerConnection(newPeerId)
         addPeerConnection(newPeerId, pc)

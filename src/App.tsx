@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import WaitingRoom from './pages/WaitingRoom';
 import VideoMeeting from './pages/MeetingRoom';
